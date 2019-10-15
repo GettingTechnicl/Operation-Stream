@@ -1,0 +1,14 @@
+[Unit]
+Description=Jackett Daemon
+After=network.target
+
+[Service]
+User=plex
+Restart=always
+RestartSec=5
+Type=simple
+ExecStart=/opt/Jackett/jackett --NoRestart
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target

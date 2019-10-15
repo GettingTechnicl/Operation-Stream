@@ -1,0 +1,14 @@
+[Unit]
+Description = /DATA/FUSE/Rclone MergerFS mount
+PartOf=media.service
+After=rclone.service
+RequiresMountsFor=/DATA
+
+[Mount]
+What = /RAID/FUSE/mergerfs/tmp_upload:/RAID/FUSE/mergerfs/gdrive
+Where = /DATA/FUSE/Rclone
+Type = fuse.mergerfs
+Options = defaults,direct_io,sync_read,allow_other,category.action=all,category.create=ff
+
+[Install]
+WantedBy=media.service

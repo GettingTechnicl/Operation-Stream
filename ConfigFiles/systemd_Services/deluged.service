@@ -1,0 +1,15 @@
+[Unit]
+Description=Deluge Bittorrent Client Daemon
+Documentation=man:deluged
+After=network-online.target
+[Service]
+Type=simple
+User=plex
+Group=plex
+UMask=007
+ExecStart=/usr/bin/deluged -d -L debug -l /DATA/logs/deluged.log
+Restart=on-failure
+# Time to wait before forcefully stopped.
+TimeoutStopSec=300
+[Install]
+WantedBy=multi-user.target
