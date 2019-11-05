@@ -57,10 +57,13 @@ options[2]="Restore"
 #Actions to take based on selection
 function ACTIONS {
     if [[ ${choices[1]} ]]; then
-        #Option 1 selected
-        echo "Option 1 selected, beginning backup"
+        #Option 2 selected
+        echo "Beginning backup"
 
 # Backup predefined folders
+
+# Create backupDir
+mkdir $backupDir
 
 # Mono
 $cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0
@@ -105,7 +108,7 @@ fi
 ################# End Of Section ###################
 
 if [[ ${choices[2]} ]]; then
-       #Option 2 selected
+       #Option 3 selected
        echo "Restoring your data, please wait..."
 
 # Restore Data
@@ -154,7 +157,7 @@ $cpycmd $backupDir/prgrmdir1 $prgrmdir1
    fi
 }
 #Variables
-ERROR="There was some kind of error, please report all applicable information"
+ERROR="Expected Error, please continue"
 
 #Clear screen for menu
 clear
