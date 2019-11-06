@@ -28,7 +28,7 @@ target_PWD=$(readlink -f .)
 cpycmd="rsync -azvh"
 
 ## Set Backup Directory here
-backupDir=/opt/backup
+backupDir=/home/plex/backup
 
 ## Programs we are backing up data for
 
