@@ -100,13 +100,13 @@ PS3='Please enter your choice: '
 while :
 do
     clear
-    options=("Install Applications ${opts[1]}" "Create Backup ${opts[2]}" "Restore Backup ${opts[3]}" "Done")
+    options=("Install Applications ${opts[1]}" "Create Backup ${opts[2]}" "Restore Backup ${opts[3]}" "Reboot ${opts[4]}" "Done ${opts[5]}")
     select opt in "${options[@]}"
     do
         case $opt in
             "Install Applications ${opts[1]}")
                 choice 1
-## Menu Functions END ##
+## Menu Functions END, choice 1 continues ##
 
 
 
@@ -427,3 +427,25 @@ $cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9
 $cpycmd $backupDir/prgrmdir1 $prgrmdir1
 break
 ;;
+
+########## Section completed ##########3
+
+"Reboot ${opts[4]}")
+sudo reboot now
+    break
+    ;;
+"Done ${opts[5]}")
+    break 2
+    ;;
+*) printf '%s\n' 'invalid option';;
+esac
+done                                                                                                                done
+
+printf '%s\n' 'Options chosen:'
+for opt in "${!opts[@]}"
+do
+if [[ ${opts[opt]} ]]
+then
+printf '%s\n' "Option $opt"
+fi
+done
