@@ -50,17 +50,29 @@ prgrmdir1=/home/plex/.config/
 
 
 #Menu options
-options[1]="Backup"
-options[2]="Restore"
 
+## Menu Functions
+choice () {
+    local choice=$1
+    if [[ ${opts[choice]} ]] # toggle
+    then
+        opts[choice]=
+    else
+        opts[choice]=+
+    fi
+}
 
-#Actions to take based on selection
-function ACTIONS {
-    if [[ ${choices[1]} ]]; then
-        #Option 2 selected
-        echo "Beginning backup"
-
-# Backup predefined folders
+PS3='Please enter your choice: '
+while :
+do
+    clear
+    options=("Backup ${opts[1]}" "Restore ${opts[2]}" "Option 3 ${opts[3]}" "Done")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "Backup ${opts[1]}")
+                choice 1
+## Menu Functions END ##
 
 # Create backupDir
 mkdir $backupDir
@@ -104,12 +116,11 @@ $cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9
 # Entire Config Folder
 $cpycmd $prgrmdir1 $backupDir/prgrmdir1
 
-fi
+break
+;;
 ################# End Of Section ###################
+          "Restore ${opts[2]}")
 
-if [[ ${choices[2]} ]]; then
-       #Option 3 selected
-       echo "Restoring your data, please wait..."
 
 # Restore Data
 
@@ -151,40 +162,30 @@ $cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9
 
 #Entire Config Folder
 $cpycmd $backupDir/prgrmdir1 $prgrmdir1
+break
+;;
 
 
+            "Option 3 ${opts[3]}")
+                choice 3
+                break
+                ;;
+            "Option 4 ${opts[4]}")
+                choice 4
+                break
+                ;;
+            "Done")
+                break 2
+                ;;
+            *) printf '%s\n' 'invalid option';;
+        esac
+    done                                                                                                                done
 
-   fi
-}
-#Variables
-ERROR="Expected Error, please continue"
-
-#Clear screen for menu
-clear
-
-#Menu function
-function MENU {
-    echo "Menu Options"
-    for NUM in ${!options[@]}; do
-        echo "[""${choices[NUM]:- }""]" $(( NUM+1 ))") ${options[NUM]}"
-    done
-    echo "$ERROR"
-}
-
-#Menu loop
-while MENU && read -e -p "Select the desired options using their number (again to uncheck, ENTER when done): " -n1 SELECTION && [[ -n "$SELECTION" ]]; do
-    clear
-    if [[ "$SELECTION" == *[[:digit:]]* && $SELECTION -ge 1 && $SELECTION -le ${#options[@]} ]]; then
-        (( SELECTION-- ))
-        if [[ "${choices[SELECTION]}" == "+" ]]; then
-            choices[SELECTION]=""
-        else
-            choices[SELECTION]="+"
-        fi
-            ERROR=" "
-    else
-        ERROR="Invalid option: $SELECTION"
+printf '%s\n' 'Options chosen:'
+for opt in "${!opts[@]}"
+do
+    if [[ ${opts[opt]} ]]
+    then
+        printf '%s\n' "Option $opt"
     fi
 done
-
-ACTIONS
