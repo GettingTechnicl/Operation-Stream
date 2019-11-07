@@ -394,14 +394,26 @@ break
 
 # Restore Data
 
+#Entire Config Folder
+$cpycmd $backupDir/prgrmdir1/ $prgrmdir1
+
 # Mono
-$cpycmd $backupDir/prgrmtrgt0 $prgrmtrgt0
+$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0
+
+# Sonarr
+$cpycmd $backupDir/prgrmtrgt1/ $bkupprgrmtrgt1
+
+# Radarr
+$cpycmd $backupDir/prgrmtrgt2/ $bkupprgrmtrgt2
+
+# Lidarr
+$cpycmd $backupDir/prgrmtrgt3/ $bkupprgrmtrgt3
 
 # NzbGet
 $cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4
 
 # Deluge
-$cpycmd $backupDir/prgrmtrgt5 $prgrmtrgt5
+$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5
 
 # Mylarr
 $cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6
@@ -412,22 +424,10 @@ $cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7
 
 # Jackett
 $cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8
-$cpycmd $backupDir/prgrmtrgt8a $prgrmtrgt8a
+$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a
 
 #Headphones
 $cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9
-
-#Entire Config Folder
-$cpycmd $backupDir/prgrmdir1 $prgrmdir1
-
-# Sonarr
-$cpycmd $backupDir/prgrmtrgt1 $bkupprgrmtrgt1
-
-# Radarr
-$cpycmd $backupDir/prgrmtrgt2 $bkupprgrmtrgt2
-
-# Lidarr
-$cpycmd $backupDir/prgrmtrgt3 $bkupprgrmtrgt3
 break
 ;;
 
@@ -442,6 +442,7 @@ sudo reboot now
     ;;
 *) printf '%s\n' 'invalid option';;
 esac
+done
 done
 
 printf '%s\n' 'Options chosen:'
