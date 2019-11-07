@@ -401,12 +401,18 @@ $cpycmd $backupDir/prgrmdir1/ $prgrmdir1
 $cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0
 
 # Sonarr
+unzip $backupDir/prgrmtrgt1/*.zip
+rm -rf $backupDir/prgrmtrgt1/*.zip
 $cpycmd $backupDir/prgrmtrgt1/ $bkupprgrmtrgt1
 
 # Radarr
+unzip $backupDir/prgrmtrgt2/*.zip
+rm -rf $backupDir/prgrmtrgt21/*.zip
 $cpycmd $backupDir/prgrmtrgt2/ $bkupprgrmtrgt2
 
 # Lidarr
+unzip $backupDir/prgrmtrgt3/*.zip
+rm -rf $backupDir/prgrmtrgt3/*.zip
 $cpycmd $backupDir/prgrmtrgt3/ $bkupprgrmtrgt3
 
 # NzbGet
