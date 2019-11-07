@@ -21,9 +21,61 @@ dl_Dir=/home/$user/Downloads
 
 ## Don't touch this one
 target_PWD=$(readlink -f .)
-
 ##############################  End Of Section ################################
+
+##### Backup Variables ##########
+## Control File Copy Command
+cpycmd="rsync -azvh"
+
+## Set Backup Directory here
+backupDir=/home/plex/backup
+
+## Programs we are backing up data for
+
+# Mono keypairs
+prgrmtrgt0=/home/plex/.config/.mono/keypairs/
+
+# Sonarr
+prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled/$(ls -1t | head -1)
+bkupprgrmtrgt1=/home/plex/.config/NzbDrone/
+
+# Radarr
+prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled/$(ls -1t | head -1)
+bkupprgrmtrgt2=/home/plex/.config/Radarr/
+
+# lidarr
+prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled/$(ls -1t | head -1)
+bkupprgrmtrgt3=/home/plex/.config/Lidarr/
+
+# NzbGet
+prgrmtrgt4=/opt/nzbget/nzbget.conf
+
+# Deluge
+prgrmtrgt5=/home/plex/.config/deluge
+
+# Mylar
+prgrmtrgt6=/opt/Mylar/mylar.db
+prgrmtrgt6a=/opt/Mylar/config.ini
+
+# Plex
+prgrmtrgt7="/var/lib/plexmediaserver/Library/Application Support/Plex Media Server"
+
+# Jackett
+prgrmtrgt8=/home/plex/.config/Jackett/ServerConfig.json
+progrmtrgt8a=/home/plex/.config/Jackett/Indexers
+
+# Headphones
+prgrmtrgt9=/opt/headphones/config.ini
+
+# Entire Config Folder
+prgrmdir1=/home/plex/.config
+
+
+################## End of Section ################
+
 # Program Download links, for easier managment
+
+dl_Mylar="https://github.com/evilhero/mylar -b development"
 
 dl_Rclone=https://downloads.rclone.org/rclone-current-linux-amd64.zip
 
@@ -37,6 +89,33 @@ dl_Jackett=https://github.com/Jackett/Jackett/releases/download/v0.11.659/Jacket
 
 dl_Ombi=https://github.com/tidusjar/Ombi/releases/download/v3.0.4680/linux.tar.gz
 ##############################  End Of Section ################################
+
+## Menu Functions
+choice () {
+    local choice=$1
+    if [[ ${opts[choice]} ]] # toggle
+    then
+        opts[choice]=
+    else
+        opts[choice]=+
+    fi
+}
+
+PS3='Please enter your choice: '
+while :
+do
+    clear
+    options=("Install Applications ${opts[1]}" "Install Apache2 ${opts[2]}" "Create Backup ${opts[3]}" "Restore Backup ${opts[4]}" "Reboot ${opts[5]}" "Done ${opts[6]}" "Stop Services ${opts[7]}")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "Install Applications ${opts[1]}")
+                choice 1
+## Menu Functions END, choice 1 continues ##
+
+
+
+
 ## This section installs depencdencies for all applications
 sudo apt update
 sudo apt install gnupg ca-certificates -y
@@ -94,7 +173,7 @@ mkdir nzbget deluge
 sudo chown -R $user.$user $app_Dir
 sudo chmod -R 755 $app_Dir
 cd $app_Dir
-mkdir Lidarr mp4_automator nzbget Mylar Ombi Radarr jackett NzbDrone
+mkdir Lidarr mp4_automator nzbget Mylar Ombi Radarr Jackett NzbDrone
 
 
 ## Now supplemental directories are created
@@ -182,7 +261,7 @@ rm -rf *.gz
 # Download and install Mylar
 # https://github.com/evilhero/mylar
 cd $dl_Dir
-git clone https://github.com/evilhero/mylar -b development /$app_Dir/Mylar
+git clone $dl_Mylar /$app_Dir/Mylar
 
 
 # Download and install Radarr
@@ -206,6 +285,7 @@ sudo apt-get install mergerfs -y
 wget $dl_Jackett
 tar -xzvf Jackett.Binaries.LinuxAMDx64.tar.gz -C $app_Dir/
 rm -rf *.gz
+sudo $app_dir/Jackett/install_service_systemd.sh
 
 
 # Download and install Ombi
@@ -259,8 +339,156 @@ sudo update-rc.d nzbdrone enable
 
 sudo cp ConfigFiles/etc-default_Services/* /etc/default/
 
-##############################  End Of Section ################################
-
 ## Everything is completed, reboot and all will be working upon startup.
 
-#sudo reboot now
+break
+;;
+##############################  End Of Section ################################
+
+
+
+          "Create Backup ${opts[3]}")
+
+ # Create backupDir
+mkdir $backupDir
+
+# Mono
+$cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0/
+
+# Sonarr
+$cpycmd $prgrmtrgt1 $backupDir/prgrmtrgt1/
+
+# Radarr
+$cpycmd $prgrmtrgt2 $backupDir/prgrmtrgt2/
+
+# Lidarr
+$cpycmd $prgrmtrgt3 $backupDir/prgrmtrgt3/
+
+# NzbGet
+$cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4/
+
+# Deluge
+$cpycmd $prgrmtrgt5 $backupDir/prgrmtrgt5/
+
+# Mylar
+$cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6/
+$cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a/
+
+# Plex
+$cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7/
+
+# Jackett
+$cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8/
+$cpycmd $progrmtrgt8a $backupDir/prgrmtrgt8a/
+
+# Headphones
+$cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9/
+
+# Entire Config Folder
+$cpycmd $prgrmdir1 $backupDir/prgrmdir1/
+break
+;;
+################# End Of Section ###################
+             "Restore Backup ${opts[4]}")
+
+# Restore Data
+
+#Entire Config Folder
+$cpycmd $backupDir/prgrmdir1/ $prgrmdir1 -A
+
+# Mono
+$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0 -A
+
+# Sonarr
+unzip $backupDir/prgrmtrgt1/$(ls -1t | head -1) -d $bkupprgrmtrgt1 -A
+
+# Radarr
+unzip $backupDir/prgrmtrgt2/$(ls -1t | head -1) -d $bkupprgrmtrgt2 -A
+
+# Lidarr
+unzip $backupDir/prgrmtrgt3/$(ls -1t | head -1) -d $bkupprgrmtrgt3 -A
+
+# NzbGet
+$cpycmd $backupDir/prgrmtrgt4/ $prgrmtrgt4 -A
+
+# Deluge
+$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5 -A
+
+# Mylarr
+$cpycmd $backupDir/prgrmtrgt6/ $prgrmtrgt6 -A
+$cpycmd $backupDir/prgrmtrgt6a/ $prgrmtrgt6a -A
+
+# Plex
+$cpycmd $backupDir/prgrmtrgt7/ $prgrmtrgt7 -A
+
+# Jackett
+$cpycmd $backupDir/prgrmtrgt8/ $prgrmtrgt8 -A
+$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a -A
+
+#Headphones
+$cpycmd $backupDir/prgrmtrgt9/ $prgrmtrgt9 -A
+break
+;;
+
+########## Section completed ##########
+
+"Install Apache2 ${opts[2]}")
+sudo add-apt-repository ppa:ondrej/apache2 -y
+sudo apt update
+sudo apt install apache2 -y
+sudo apt install php7.2 -y
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod proxy_balancer
+sudo a2enmod lbmethod_byrequests
+sudo a2enmod headers
+sudo a2enmod rewrite
+sudo a2enmod php7.2
+sudo a2enmod cache_disk
+sudo a2enmod expires
+sudo a2enmod ssl
+sudo systemctl restart apache2
+
+########### End Section ##############
+
+break
+;;
+"Reboot ${opts[5]}")
+sudo reboot now
+    break
+    ;;
+
+############# End Section #############
+"Done ${opts[6]}")
+break 2
+;;
+
+"Stop Services ${opts[7]}")
+sudo service stop nzbdrone
+sudo service stop radarr
+sudo service stop lidarr
+sudo service stop nzbget
+sudo service stop deluged
+sudo service stop deluge-web
+sudo service stop mylar
+sudo service stop plexmediaserver
+sudo service stop jackett
+sudo service stop headphones
+break
+;;
+########### Section Completed #########
+
+*) printf '%s\n' 'invalid option';;
+esac
+done
+done
+
+
+printf '%s\n' 'Options chosen:'
+for opt in "${!opts[@]}"
+do
+if [[ ${opts[opt]} ]]
+then
+printf '%s\n' "Option $opt"
+fi
+done
