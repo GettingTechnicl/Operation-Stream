@@ -389,22 +389,13 @@ $cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9
 $cpycmd $prgrmdir1 $backupDir/prgrmdir1
 break
 ;;
-################# End Of Section ###################        ################# End Of Section ###################
-            "Restore Backup ${opts[3]}")
+################# End Of Section ###################
+             "Restore Backup ${opts[3]}")
 
 # Restore Data
 
 # Mono
 $cpycmd $backupDir/prgrmtrgt0 $prgrmtrgt0
-
-# Sonarr
-$cpycmd $backupDir/prgrmtrgt1 $bkupprgrmtrgt1
-
-# Radarr
-$cpycmd $backupDir/prgrmtrgt2 $bkupprgrmtrgt2
-
-# Lidarr
-$cpycmd $backupDir/prgrmtrgt3 $bkupprgrmtrgt3
 
 # NzbGet
 $cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4
@@ -414,13 +405,13 @@ $cpycmd $backupDir/prgrmtrgt5 $prgrmtrgt5
 
 # Mylarr
 $cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6
-
-# Mylarr
 $cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a
 
-# Plex                                                                                                                  $cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7
-                                                                                                                        # Jackett                                                                                                               $cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8
-                                                                                                                        # Jackett
+# Plex
+$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7
+
+# Jackett
+$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8
 $cpycmd $backupDir/prgrmtrgt8a $prgrmtrgt8a
 
 #Headphones
@@ -428,6 +419,15 @@ $cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9
 
 #Entire Config Folder
 $cpycmd $backupDir/prgrmdir1 $prgrmdir1
+
+# Sonarr
+$cpycmd $backupDir/prgrmtrgt1 $bkupprgrmtrgt1
+
+# Radarr
+$cpycmd $backupDir/prgrmtrgt2 $bkupprgrmtrgt2
+
+# Lidarr
+$cpycmd $backupDir/prgrmtrgt3 $bkupprgrmtrgt3
 break
 ;;
 
@@ -442,7 +442,7 @@ sudo reboot now
     ;;
 *) printf '%s\n' 'invalid option';;
 esac
-done                                                                                                                done
+done
 
 printf '%s\n' 'Options chosen:'
 for opt in "${!opts[@]}"
