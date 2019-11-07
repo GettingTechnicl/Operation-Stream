@@ -36,15 +36,15 @@ backupDir=/home/plex/backup
 prgrmtrgt0=/home/plex/.config/.mono/keypairs/
 
 # Sonarr
-prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled/
+prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled/$(ls -1t | head -1)
 bkupprgrmtrgt1=/home/plex/.config/NzbDrone/
 
 # Radarr
-prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled/
+prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled/$(ls -1t | head -1)
 bkupprgrmtrgt2=/home/plex/.config/Radarr/
 
 # lidarr
-prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled/
+prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled/$(ls -1t | head -1)
 bkupprgrmtrgt3=/home/plex/.config/Lidarr/
 
 # NzbGet
@@ -372,8 +372,6 @@ $cpycmd $prgrmtrgt5 $backupDir/prgrmtrgt5/
 
 # Mylar
 $cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6/
-
-# Mylar
 $cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a/
 
 # Plex
@@ -381,8 +379,6 @@ $cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7/
 
 # Jackett
 $cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8/
-
-# Jackett
 $cpycmd $progrmtrgt8a $backupDir/prgrmtrgt8a/
 
 # Headphones
