@@ -68,12 +68,14 @@ progrmtrgt8a=/home/plex/.config/Jackett/Indexers
 prgrmtrgt9=/opt/headphones/config.ini
 
 # Entire Config Folder
-prgrmdir1=/home/plex/.config/
+prgrmdir1=/home/plex/.config
 
 
 ################## End of Section ################
 
 # Program Download links, for easier managment
+
+dl_Mylar="https://github.com/evilhero/mylar -b development"
 
 dl_Rclone=https://downloads.rclone.org/rclone-current-linux-amd64.zip
 
@@ -171,7 +173,7 @@ mkdir nzbget deluge
 sudo chown -R $user.$user $app_Dir
 sudo chmod -R 755 $app_Dir
 cd $app_Dir
-mkdir Lidarr mp4_automator nzbget Mylar Ombi Radarr jackett NzbDrone
+mkdir Lidarr mp4_automator nzbget Mylar Ombi Radarr Jackett NzbDrone
 
 
 ## Now supplemental directories are created
@@ -259,7 +261,7 @@ rm -rf *.gz
 # Download and install Mylar
 # https://github.com/evilhero/mylar
 cd $dl_Dir
-git clone https://github.com/evilhero/mylar -b development /$app_Dir/Mylar
+git clone $dl_Mylar /$app_Dir/Mylar
 
 
 # Download and install Radarr
@@ -283,6 +285,7 @@ sudo apt-get install mergerfs -y
 wget $dl_Jackett
 tar -xzvf Jackett.Binaries.LinuxAMDx64.tar.gz -C $app_Dir/
 rm -rf *.gz
+sudo $app_dir/Jackett/install_service_systemd.sh
 
 
 # Download and install Ombi
@@ -350,43 +353,43 @@ break
 mkdir $backupDir
 
 # Mono
-$cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0
+$cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0/
 
 # Sonarr
-$cpycmd $prgrmtrgt1 $backupDir/prgrmtrgt1
+$cpycmd $prgrmtrgt1 $backupDir/prgrmtrgt1/
 
 # Radarr
-$cpycmd $prgrmtrgt2 $backupDir/prgrmtrgt2
+$cpycmd $prgrmtrgt2 $backupDir/prgrmtrgt2/
 
 # Lidarr
-$cpycmd $prgrmtrgt3 $backupDir/prgrmtrgt3
+$cpycmd $prgrmtrgt3 $backupDir/prgrmtrgt3/
 
 # NzbGet
-$cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4
+$cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4/
 
 # Deluge
-$cpycmd $prgrmtrgt5 $backupDir/prgrmtrgt5
+$cpycmd $prgrmtrgt5 $backupDir/prgrmtrgt5/
 
 # Mylar
-$cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6
+$cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6/
 
 # Mylar
-$cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a
+$cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a/
 
 # Plex
-$cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7
+$cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7/
 
 # Jackett
-$cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8
+$cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8/
 
 # Jackett
-$cpycmd $progrmtrgt8a $backupDir/prgrmtrgt8a
+$cpycmd $progrmtrgt8a $backupDir/prgrmtrgt8a/
 
 # Headphones
-$cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9
+$cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9/
 
 # Entire Config Folder
-$cpycmd $prgrmdir1 $backupDir/prgrmdir1
+$cpycmd $prgrmdir1 $backupDir/prgrmdir1/
 break
 ;;
 ################# End Of Section ###################
@@ -401,39 +404,36 @@ $cpycmd $backupDir/prgrmdir1/ $prgrmdir1 -A
 $cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0 -A
 
 # Sonarr
-unzip $backupDir/prgrmtrgt1/*.zip
+unzip $backupDir/prgrmtrgt1/*.zip -d $bkupprgrmtrgt1 -A
 rm -rf $backupDir/prgrmtrgt1/*.zip
-$cpycmd $backupDir/prgrmtrgt1/ $bkupprgrmtrgt1 -A
 
 # Radarr
-unzip $backupDir/prgrmtrgt2/*.zip
+unzip $backupDir/prgrmtrgt2/*.zip -d $bkupprgrmtrgt2 -A
 rm -rf $backupDir/prgrmtrgt2/*.zip
-$cpycmd $backupDir/prgrmtrgt2/ $bkupprgrmtrgt2 -A
 
 # Lidarr
-unzip $backupDir/prgrmtrgt3/*.zip
+unzip $backupDir/prgrmtrgt3/*.zip -d $bkupprgrmtrgt3 -A
 rm -rf $backupDir/prgrmtrgt3/*.zip
-$cpycmd $backupDir/prgrmtrgt3/ $bkupprgrmtrgt3 -A
 
 # NzbGet
-$cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4 -A
+$cpycmd $backupDir/prgrmtrgt4/ $prgrmtrgt4 -A
 
 # Deluge
 $cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5 -A
 
 # Mylarr
-$cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6 -A
-$cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a -A
+$cpycmd $backupDir/prgrmtrgt6/ $prgrmtrgt6 -A
+$cpycmd $backupDir/prgrmtrgt6a/ $prgrmtrgt6a -A
 
 # Plex
-$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7 -A
+$cpycmd $backupDir/prgrmtrgt7/ $prgrmtrgt7 -A
 
 # Jackett
-$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8 -A
+$cpycmd $backupDir/prgrmtrgt8/ $prgrmtrgt8 -A
 $cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a -A
 
 #Headphones
-$cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9 -A
+$cpycmd $backupDir/prgrmtrgt9/ $prgrmtrgt9 -A
 break
 ;;
 
@@ -443,10 +443,17 @@ break
 sudo add-apt-repository ppa:ondrej/apache2 -y
 sudo apt update
 sudo apt install apache2 -y
+sudo apt install php7.2 -y
 sudo a2enmod proxy
 sudo a2enmod proxy_http
 sudo a2enmod proxy_balancer
 sudo a2enmod lbmethod_byrequests
+sudo a2enmod headers
+sudo a2enmod rewrite
+sudo a2enmod php7.2
+sudo a2enmod cache_disk
+sudo a2enmod expires
+sudo a2enmod ssl
 sudo systemctl restart apache2
 
 break
