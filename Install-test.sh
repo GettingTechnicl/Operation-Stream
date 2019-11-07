@@ -103,7 +103,7 @@ PS3='Please enter your choice: '
 while :
 do
     clear
-    options=("Install Applications ${opts[1]}" "Create Backup ${opts[2]}" "Restore Backup ${opts[3]}" "Reboot ${opts[4]}" "Done ${opts[5]}")
+    options=("Install Applications ${opts[1]}" "Install Apache2 ${opts[2]}" "Create Backup ${opts[3]}" "Restore Backup ${opts[4]}" "Reboot ${opts[5]}" "Done ${opts[6]}")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -344,7 +344,7 @@ break
 
 
 
-          "Create Backup ${opts[2]}")
+          "Create Backup ${opts[3]}")
 
  # Create backupDir
 mkdir $backupDir
@@ -390,66 +390,81 @@ $cpycmd $prgrmdir1 $backupDir/prgrmdir1
 break
 ;;
 ################# End Of Section ###################
-             "Restore Backup ${opts[3]}")
+             "Restore Backup ${opts[4]}")
 
 # Restore Data
 
 #Entire Config Folder
-$cpycmd $backupDir/prgrmdir1/ $prgrmdir1
+$cpycmd $backupDir/prgrmdir1/ $prgrmdir1 -A
 
 # Mono
-$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0
+$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0 -A
 
 # Sonarr
 unzip $backupDir/prgrmtrgt1/*.zip
 rm -rf $backupDir/prgrmtrgt1/*.zip
-$cpycmd $backupDir/prgrmtrgt1/ $bkupprgrmtrgt1
+$cpycmd $backupDir/prgrmtrgt1/ $bkupprgrmtrgt1 -A
 
 # Radarr
 unzip $backupDir/prgrmtrgt2/*.zip
-rm -rf $backupDir/prgrmtrgt21/*.zip
-$cpycmd $backupDir/prgrmtrgt2/ $bkupprgrmtrgt2
+rm -rf $backupDir/prgrmtrgt2/*.zip
+$cpycmd $backupDir/prgrmtrgt2/ $bkupprgrmtrgt2 -A
 
 # Lidarr
 unzip $backupDir/prgrmtrgt3/*.zip
 rm -rf $backupDir/prgrmtrgt3/*.zip
-$cpycmd $backupDir/prgrmtrgt3/ $bkupprgrmtrgt3
+$cpycmd $backupDir/prgrmtrgt3/ $bkupprgrmtrgt3 -A
 
 # NzbGet
-$cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4
+$cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4 -A
 
 # Deluge
-$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5
+$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5 -A
 
 # Mylarr
-$cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6
-$cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a
+$cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6 -A
+$cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a -A
 
 # Plex
-$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7
+$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7 -A
 
 # Jackett
-$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8
-$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a
+$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8 -A
+$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a -A
 
 #Headphones
-$cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9
+$cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9 -A
 break
 ;;
 
-########## Section completed ##########3
+########## Section completed ##########
 
-"Reboot ${opts[4]}")
+"Install Apache2 ${opts[2]}")
+sudo add-apt-repository ppa:ondrej/apache2 -y
+sudo apt update
+sudo apt install apache2 -y
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod proxy_balancer
+sudo a2enmod lbmethod_byrequests
+sudo systemctl restart apache2
+
+break
+;;
+"Reboot ${opts[5]}")
 sudo reboot now
     break
     ;;
-"Done ${opts[5]}")
-    break 2
-    ;;
+"Done ${opts[6]}")
+break 2
+;;
+########### Section Completed #########
+
 *) printf '%s\n' 'invalid option';;
 esac
 done
 done
+
 
 printf '%s\n' 'Options chosen:'
 for opt in "${!opts[@]}"
