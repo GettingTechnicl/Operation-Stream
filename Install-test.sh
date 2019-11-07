@@ -105,7 +105,7 @@ PS3='Please enter your choice: '
 while :
 do
     clear
-    options=("Install Applications ${opts[1]}" "Install Apache2 ${opts[2]}" "Create Backup ${opts[3]}" "Restore Backup ${opts[4]}" "Reboot ${opts[5]}" "Done ${opts[6]}")
+    options=("Install Applications ${opts[1]}" "Install Apache2 ${opts[2]}" "Create Backup ${opts[3]}" "Restore Backup ${opts[4]}" "Reboot ${opts[5]}" "Done ${opts[6]}" "Stop Services ${opts[7]}")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -449,14 +449,32 @@ sudo a2enmod expires
 sudo a2enmod ssl
 sudo systemctl restart apache2
 
+########### End Section ##############
+
 break
 ;;
 "Reboot ${opts[5]}")
 sudo reboot now
     break
     ;;
+
+############# End Section #############
 "Done ${opts[6]}")
 break 2
+;;
+
+"Stop Services ${opts[7]}")
+sudo service stop nzbdrone
+sudo service stop radarr
+sudo service stop lidarr
+sudo service stop nzbget
+sudo service stop deluged
+sudo service stop deluge-web
+sudo service stop mylar
+sudo service stop plexmediaserver
+sudo service stop jackett
+sudo service stop headphones
+break
 ;;
 ########### Section Completed #########
 
