@@ -484,16 +484,16 @@ break
 ########### Section Completed #########
 
 "Start Services ${opts[8]}")
-sudo service nzbdrone
-sudo service radarr
-sudo service lidarr
-sudo service nzbget
-sudo service deluged
-sudo service deluge-web
-sudo service mylar
-sudo service plexmediaserver
-sudo service jackett
-sudo service headphones
+sudo service nzbdrone start
+sudo service radarr start
+sudo service lidarr start
+sudo service nzbget start
+sudo service deluged start
+sudo service deluge-web start
+sudo service mylar start
+sudo service plexmediaserver start
+sudo service jackett start
+sudo service headphones start
 break
 ;;
 
