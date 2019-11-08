@@ -25,7 +25,7 @@ target_PWD=$(readlink -f .)
 
 ##### Backup Variables ##########
 ## Control File Copy Command
-cpycmd="rsync -azvh"
+cpycmd="rsync -razvh"
 
 ## Set Backup Directory here
 backupDir=/home/plex/backup
