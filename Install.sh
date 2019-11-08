@@ -210,11 +210,11 @@ cd $dl_Dir
 wget $dl_Rclone
 unzip rclone-current-linux-amd64.zip
 cd rclone-*-linux-amd64
-sudo cp rclone /usr/bin/
+sudo cp rclone /usr/bin/ -A
 sudo chown root:root /usr/bin/rclone
 sudo chmod 755 /usr/bin/rclone
 sudo mkdir -p /usr/local/share/man/man1
-sudo cp rclone.1 /usr/local/share/man/man1/
+sudo cp rclone.1 /usr/local/share/man/man1/ -A
 sudo mandb
 #rclone config
 cd $dl_Dir
@@ -246,7 +246,7 @@ sudo apt install nzbdrone -y
 
 # Download and install deluge
 # https://dev.deluge-torrent.org
-sudo add-apt-repository ppa:deluge-team/stable
+sudo add-apt-repository ppa:deluge-team/stable -y
 sudo apt-get update
 sudo apt-get install deluged deluge-web deluge-console -y
 
