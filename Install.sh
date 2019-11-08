@@ -353,7 +353,7 @@ break
 mkdir $backupDir
 
 # Mono
-$cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0/
+$cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0
 
 # Sonarr
 $cpycmd $prgrmtrgt1/$(ls -1t | head -1) $backupDir/prgrmtrgt1/
@@ -365,27 +365,27 @@ $cpycmd $prgrmtrgt2/$(ls -1t | head -1) $backupDir/prgrmtrgt2/
 $cpycmd $prgrmtrgt3/$(ls -1t | head -1) $backupDir/prgrmtrgt3/
 
 # NzbGet
-$cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4/
+$cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4
 
 # Deluge
-$cpycmd $prgrmtrgt5 $backupDir/prgrmtrgt5/
+$cpycmd $prgrmtrgt5 $backupDir/prgrmtrgt5
 
 # Mylar
-$cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6/
-$cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a/
+$cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6
+$cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a
 
 # Plex
-$cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7/
+$cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7
 
 # Jackett
-$cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8/
-$cpycmd $progrmtrgt8a $backupDir/prgrmtrgt8a/
+$cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8
+$cpycmd $progrmtrgt8a $backupDir/prgrmtrgt8a
 
 # Headphones
-$cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9/
+$cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9
 
 # Entire Config Folder
-$cpycmd $prgrmdir1 $backupDir/prgrmdir1/
+$cpycmd $prgrmdir1 $backupDir/prgrmdir1
 break
 ;;
 ################# End Of Section ###################
@@ -394,10 +394,10 @@ break
 # Restore Data
 
 #Entire Config Folder
-$cpycmd $backupDir/prgrmdir1/ $prgrmdir1 -A
+$cpycmd $backupDir/prgrmdir1 $prgrmdir1 -A
 
 # Mono
-$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0 -A
+$cpycmd $backupDir/prgrmtrgt0 $prgrmtrgt0 -A
 
 # Sonarr
 unzip $backupDir/prgrmtrgt1/$(ls -1t | head -1) -d $bkupprgrmtrgt1 -A
@@ -409,24 +409,24 @@ unzip $backupDir/prgrmtrgt2/$(ls -1t | head -1) -d $bkupprgrmtrgt2 -A
 unzip $backupDir/prgrmtrgt3/$(ls -1t | head -1) -d $bkupprgrmtrgt3 -A
 
 # NzbGet
-$cpycmd $backupDir/prgrmtrgt4/ $prgrmtrgt4 -A
+$cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4 -A
 
 # Deluge
-$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5 -A
+$cpycmd $backupDir/prgrmtrgt5 $prgrmtrgt5 -A
 
 # Mylarr
-$cpycmd $backupDir/prgrmtrgt6/ $prgrmtrgt6 -A
-$cpycmd $backupDir/prgrmtrgt6a/ $prgrmtrgt6a -A
+$cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6 -A
+$cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a -A
 
 # Plex
-$cpycmd $backupDir/prgrmtrgt7/ $prgrmtrgt7 -A
+$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7 -A
 
 # Jackett
-$cpycmd $backupDir/prgrmtrgt8/ $prgrmtrgt8 -A
-$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a -A
+$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8 -A
+$cpycmd $backupDir/prgrmtrgt8a $prgrmtrgt8a -A
 
 #Headphones
-$cpycmd $backupDir/prgrmtrgt9/ $prgrmtrgt9 -A
+$cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9 -A
 break
 ;;
 
