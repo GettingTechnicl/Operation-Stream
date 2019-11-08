@@ -119,8 +119,8 @@ do
 ## This section installs depencdencies for all applications
 sudo apt update
 sudo apt install gnupg ca-certificates -y
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF -y
+echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list -y
 sudo apt update
 
 sudo apt-get install unzip python3-pip python-setuptools python3 sqlite3 libsqlite3-dev python python-cherrypy git mergerfs libmono-cil-dev curl mediainfo liblttng-ust0 libcurl4 libssl1.0.0 libkrb5-3 zlib1g libicu60 libunwind8 libuuid1 -y
@@ -447,6 +447,9 @@ sudo a2enmod php7.2
 sudo a2enmod cache_disk
 sudo a2enmod expires
 sudo a2enmod ssl
+suo a2dissite 000-default*
+sudo cp $target_PWD/ConfigFiles/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+sudo a2ensite 000-default*
 sudo systemctl restart apache2
 
 ########### End Section ##############
