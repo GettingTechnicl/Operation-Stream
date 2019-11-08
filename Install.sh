@@ -105,7 +105,7 @@ PS3='Please enter your choice: '
 while :
 do
     clear
-    options=("Install Applications ${opts[1]}" "Install Apache2 ${opts[2]}" "Create Backup ${opts[3]}" "Restore Backup ${opts[4]}" "Reboot ${opts[5]}" "Done ${opts[6]}" "Stop Services ${opts[7]}")
+    options=("Install Applications ${opts[1]}" "Install Apache2 ${opts[2]}" "Create Backup ${opts[3]}" "Restore Backup ${opts[4]}" "Reboot ${opts[5]}" "Done ${opts[6]}" "Stop Services ${opts[7]}" "Start Services ${opts[8]}")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -466,6 +466,8 @@ sudo reboot now
 break 2
 ;;
 
+########### End Section ##########
+
 "Stop Services ${opts[7]}")
 sudo service stop nzbdrone
 sudo service stop radarr
@@ -480,6 +482,22 @@ sudo service stop headphones
 break
 ;;
 ########### Section Completed #########
+
+"Start Services ${opts[8]}")
+sudo service start nzbdrone
+sudo service start radarr
+sudo service start lidarr
+sudo service start nzbget
+sudo service start deluged
+sudo service start deluge-web
+sudo service start mylar
+sudo service start plexmediaserver
+sudo service start jackett
+sudo service start headphones
+break
+;;
+
+############ End Section ############
 
 *) printf '%s\n' 'invalid option';;
 esac
