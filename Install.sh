@@ -36,15 +36,15 @@ backupDir=/home/plex/backup
 prgrmtrgt0=/home/plex/.config/.mono/keypairs/
 
 # Sonarr
-prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled/$(ls -1t | head -1)
+prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled
 bkupprgrmtrgt1=/home/plex/.config/NzbDrone/
 
 # Radarr
-prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled/$(ls -1t | head -1)
+prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled
 bkupprgrmtrgt2=/home/plex/.config/Radarr/
 
 # lidarr
-prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled/$(ls -1t | head -1)
+prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled
 bkupprgrmtrgt3=/home/plex/.config/Lidarr/
 
 # NzbGet
@@ -356,13 +356,13 @@ mkdir $backupDir
 $cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0/
 
 # Sonarr
-$cpycmd $prgrmtrgt1 $backupDir/prgrmtrgt1/
+$cpycmd $prgrmtrgt1/$(ls -1t | head -1) $backupDir/prgrmtrgt1/
 
 # Radarr
-$cpycmd $prgrmtrgt2 $backupDir/prgrmtrgt2/
+$cpycmd $prgrmtrgt2/$(ls -1t | head -1) $backupDir/prgrmtrgt2/
 
 # Lidarr
-$cpycmd $prgrmtrgt3 $backupDir/prgrmtrgt3/
+$cpycmd $prgrmtrgt3/$(ls -1t | head -1) $backupDir/prgrmtrgt3/
 
 # NzbGet
 $cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4/
