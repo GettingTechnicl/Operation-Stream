@@ -322,7 +322,7 @@ sudo chmod -R 755 $driveArray
 
 ## Move service files and enable them
 cd $target_PWD
-sudo cp ConfigFiles/systemd_Services/* /etc/systemd/system/
+sudo cp ConfigFiles/systemd_Services/* /etc/systemd/system/ -A
 
 sudo systemctl enable DATA-FUSE-Rclone.mount
 sudo systemctl enable deluge-web.service
@@ -349,7 +349,7 @@ sudo update-rc.d lazylibrarian enable
 sudo update-rc.d mylar enable
 sudo update-rc.d nzbdrone enable
 
-sudo cp ConfigFiles/etc-default_Services/* /etc/default/
+sudo cp ConfigFiles/etc-default_Services/* /etc/default/ -A
 
 ## Everything is completed, reboot and all will be working upon startup.
 
