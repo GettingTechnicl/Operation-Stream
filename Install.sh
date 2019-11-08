@@ -23,13 +23,25 @@ dl_Dir=/home/$user/Downloads
 target_PWD=$(readlink -f .)
 ##############################  End Of Section ################################
 
+######### Set Remote backup Info here ########
+
+## Backup Local to Remote here
+sshPort2="-e 'ssh -p 477'"
+remSrc2=user@192.168.20.5
+
+## Backup Remote to Local here
+sshPort="-e 'ssh -p 478'"
+remSrc=user@xxx.xxx.xxx.xxx
+remDest=~/backup
+
+############# End Section ###############
+
 ##### Backup Variables ##########
 ## Control File Copy Command
 cpycmd="rsync -razvh"
 
 ## Set Backup Directory here
 backupDir=/home/plex/backup
-
 ## Programs we are backing up data for
 
 # Mono keypairs
@@ -105,7 +117,7 @@ PS3='Please enter your choice: '
 while :
 do
     clear
-    options=("Install Applications ${opts[1]}" "Install Apache2 ${opts[2]}" "Create Backup ${opts[3]}" "Restore Backup ${opts[4]}" "Reboot ${opts[5]}" "Done ${opts[6]}" "Stop Services ${opts[7]}" "Start Services ${opts[8]}")
+    options=("Install Applications ${opts[1]}" "Install Apache2 ${opts[2]}" "Create Backup ${opts[3]}" "Restore Backup ${opts[4]}" "Reboot ${opts[5]}" "Done ${opts[6]}" "Stop Services ${opts[7]}" "Start Services ${opts[8]}" "Sync 2 Remote${opts[9]}" "Sync 2 Local${opts[10]}")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -391,7 +403,7 @@ break
 ################# End Of Section ###################
              "Restore Backup ${opts[4]}")
 
-# Restore Data
+
 
 #Entire Config Folder
 $cpycmd $backupDir/prgrmdir1 $prgrmdir1 -A
@@ -498,6 +510,21 @@ break
 ;;
 
 ############ End Section ############
+
+"Sync 2 Local${opts[9]}")
+$cpycmd $sshPort $remSrc:$remDest $backupDir
+break
+;;
+
+############# End Section ##########
+
+"Sync 2 Remote${opts[10]}")
+$cpycmd $sshPort2 $backupDir $remSrc2:$remDest
+break
+;;
+
+############# End Section ############
+
 
 *) printf '%s\n' 'invalid option';;
 esac
