@@ -469,31 +469,31 @@ break 2
 ########### End Section ##########
 
 "Stop Services ${opts[7]}")
-sudo service stop nzbdrone
-sudo service stop radarr
-sudo service stop lidarr
-sudo service stop nzbget
-sudo service stop deluged
-sudo service stop deluge-web
-sudo service stop mylar
-sudo service stop plexmediaserver
-sudo service stop jackett
-sudo service stop headphones
+sudo service nzbdrone stop
+sudo service radarr stop
+sudo service lidarr stop
+sudo service nzbget stop
+sudo service deluged stop
+sudo service deluge-web stop
+sudo service mylar stop
+sudo service plexmediaserver stop
+sudo service jackett stop
+sudo service headphones stop
 break
 ;;
 ########### Section Completed #########
 
 "Start Services ${opts[8]}")
-sudo service start nzbdrone
-sudo service start radarr
-sudo service start lidarr
-sudo service start nzbget
-sudo service start deluged
-sudo service start deluge-web
-sudo service start mylar
-sudo service start plexmediaserver
-sudo service start jackett
-sudo service start headphones
+sudo service nzbdrone
+sudo service radarr
+sudo service lidarr
+sudo service nzbget
+sudo service deluged
+sudo service deluge-web
+sudo service mylar
+sudo service plexmediaserver
+sudo service jackett
+sudo service headphones
 break
 ;;
 
