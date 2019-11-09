@@ -1,26 +1,29 @@
 #!/usr/bin/env bash
 
 #This script backs up all program data file for restorability
-
+##### Backup Variables ##########
+##### Backup Variables ##########
 ## Control File Copy Command
-cpycmd="rsync -azvh"
+cpycmd="rsync -razvh"
 
 ## Set Backup Directory here
-backupDir=/opt/backup
-
+backupDir=/home/plex/backup
 ## Programs we are backing up data for
 
 # Mono keypairs
-prgrmtrgt0=/home/plex/.config/.mono/keypairs/
+prgrmtrgt0=/home/plex/.config/.mono/keypairs
 
 # Sonarr
 prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled/
+bkupprgrmtrgt1=/home/plex/.config/NzbDrone
 
 # Radarr
 prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled/
+bkupprgrmtrgt2=/home/plex/.config/Radarr
 
 # lidarr
 prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled/
+bkupprgrmtrgt3=/home/plex/.config/Lidarr
 
 # NzbGet
 prgrmtrgt4=/opt/nzbget/nzbget.conf
@@ -43,7 +46,8 @@ progrmtrgt8a=/home/plex/.config/Jackett/Indexers
 prgrmtrgt9=/opt/headphones/config.ini
 
 # Entire Config Folder
-prgrmdir1=/home/plex/.config/
+prgrmdir1=/home/plex/.config
+
 
 
 ################## End of Section ################
@@ -78,27 +82,25 @@ do
 mkdir $backupDir
 
 # Mono
-$cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0
+$cpycmd $prgrmtrgt0/ $backupDir/prgrmtrgt0
 
 # Sonarr
-$cpycmd $prgrmtrgt1 $backupDir/prgrmtrgt1
+$cpycmd $prgrmtrgt1/$(ls -1t | head -1) $backupDir/prgrmtrgt1
 
 # Radarr
-$cpycmd $prgrmtrgt2 $backupDir/prgrmtrgt2
+$cpycmd $prgrmtrgt2/$(ls -1t | head -1) $backupDir/prgrmtrgt2
 
 # Lidarr
-$cpycmd $prgrmtrgt3 $backupDir/prgrmtrgt3
+$cpycmd $prgrmtrgt3/$(ls -1t | head -1) $backupDir/prgrmtrgt3
 
 # NzbGet
 $cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4
 
 # Deluge
-$cpycmd $prgrmtrgt5 $backupDir/prgrmtrgt5
+$cpycmd $prgrmtrgt5/ $backupDir/prgrmtrgt5
 
 # Mylar
 $cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6
-
-# Mylar
 $cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a
 
 # Plex
@@ -106,62 +108,51 @@ $cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7
 
 # Jackett
 $cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8
-
-# Jackett
-$cpycmd $progrmtrgt8a $backupDir/prgrmtrgt8a
+$cpycmd $progrmtrgt8a/ $backupDir/prgrmtrgt8a
 
 # Headphones
 $cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9
 
 # Entire Config Folder
-$cpycmd $prgrmdir1 $backupDir/prgrmdir1
-
+$cpycmd $prgrmdir1/ $backupDir/prgrmdir1
 break
 ;;
 ################# End Of Section ###################
           "Restore ${opts[2]}")
 
 
-# Restore Data
+#Entire Config Folder
+#$cpycmd $backupDir/prgrmdir1 $prgrmdir1 -A
 
 # Mono
-$cpycmd $backupDir/prgrmtrgt0 $prgrmtrgt0
+$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0 -A
 
 # Sonarr
-$cpycmd $backupDir/prgrmtrgt1 $prgrmtrgt1
+unzip $backupDir/prgrmtrgt1/$(ls -1t | head -1) -d $bkupprgrmtrgt1 -A
 
 # Radarr
-$cpycmd $backupDir/prgrmtrgt2 $prgrmtrgt2
+unzip $backupDir/prgrmtrgt2/$(ls -1t | head -1) -d $bkupprgrmtrgt2 -A
 
 # Lidarr
-$cpycmd $backupDir/prgrmtrgt3 $prgrmtrgt3
+unzip $backupDir/prgrmtrgt3/$(ls -1t | head -1) -d $bkupprgrmtrgt3 -A
 
 # NzbGet
-$cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4
+$cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4 -A
 
 # Deluge
-$cpycmd $backupDir/prgrmtrgt5 $prgrmtrgt5
+$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5 -A
 
 # Mylarr
-$cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6
-
-# Mylarr
-$cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a
+$cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6 -A
+$cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a -A
 
 # Plex
-$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7
+$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7 -A
 
 # Jackett
-$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8
+$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8 -A
+$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a -A
 
-# Jackett
-$cpycmd $backupDir/prgrmtrgt8a $prgrmtrgt8a
-
-#Headphones
-$cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9
-
-#Entire Config Folder
-$cpycmd $backupDir/prgrmdir1 $prgrmdir1
 break
 ;;
 
