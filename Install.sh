@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Set your root download path here (ex. rootpath=/DATA)
+## Set your root download path here (ex. rootpath=/DATA) MUST BE /PATH  NOT /TO/PATH
 rootpath=/DATA
 
 ## Set the drive path to a secondary drive, fuse, raid. On my setup this is a raid, and the purpose of This
@@ -10,10 +10,11 @@ rootpath=/DATA
 driveArray=/RAID
 
 ## Set the user that EVERYTHING will run under here (ex. user=plex)
+## Currently will grab the user running the script
 user=$USER
 
 ## Set your website name for reverse proxy ## (Ex. example.com NOT www.example.com - www.example.com will cause issues)
-siteName=example.com
+siteName=test.com
 ## Set the location you want the applications to be installed in, I recommend
 ## /opt... (ex. app_Dir=/opt)
 app_Dir=/opt
@@ -327,13 +328,26 @@ sudo chmod -R 755 $driveArray
 ## Move service files and enable them
 cd $target_PWD
 sudo cp ConfigFiles/systemd_Services/* /etc/systemd/system/ -A
+sudo mv /etc/systemd/system/DATA-FUSE-Rclone.mount /etc/systemd/system$rootpath-FUSE-Rclone.mount
 sudo find /etc/systemd/system/ -type f -name "*" -print0 | xargs -0 sed -i "s/userplex/$user/g"
+sudo find /etc/systemd/system/ -type f -name "*" -print0 | xargs -0 sed -i "s|/opt|$app_Dir|g"
+sudo find /etc/systemd/system/ -type f -name "*" -print0 | xargs -0 sed -i "s|/DATA|$rootpath|g"
+sudo find /etc/systemd/system/ -type f -name "*" -print0 | xargs -0 sed -i "s|/RAID|$driveArray|g"
+
 
 sudo cp ConfigFiles/init.d_Services/* /etc/init.d/
 sudo find /etc/init.d/ -type f -name "*" -print0 | xargs -0 sed -i "s/userplex/$user/g"
+sudo find /etc/init.d/ -type f -name "*" -print0 | xargs -0 sed -i "s|/opt|$app_Dir|g"
+sudo find /etc/init.d/ -type f -name "*" -print0 | xargs -0 sed -i "s|/DATA|$rootpath|g"
+sudo find /etc/init.d/ -type f -name "*" -print0 | xargs -0 sed -i "s|/RAID|$driveArray|g"
+
 
 sudo cp ConfigFiles/etc-default_Services/* /etc/default/ -A
 sudo find /etc/default/ -type f -name "*" -print0 | xargs -0 sed -i "s/userplex/$user/g"
+sudo find /etc/default/ -type f -name "*" -print0 | xargs -0 sed -i "s|/opt|$app_Dir|g"
+sudo find /etc/default/ -type f -name "*" -print0 | xargs -0 sed -i "s|/DATA|$rootpath|g"
+sudo find /etc/default/ -type f -name "*" -print0 | xargs -0 sed -i "s|/RAID|$driveArray|g"
+
 
 sudo chown -R root.root /etc/systemd/system
 sudo chown -R root.root /etc/init.d
