@@ -10,7 +10,7 @@ rootpath=/DATA
 driveArray=/RAID
 
 ## Set the user that EVERYTHING will run under here (ex. user=plex)
-user=plex
+user=$USER
 
 ## Set the location you want the applications to be installed in, I recommend
 ## /opt... (ex. app_Dir=/opt)
