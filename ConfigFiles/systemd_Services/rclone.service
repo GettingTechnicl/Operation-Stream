@@ -16,11 +16,11 @@ ExecStart=/usr/bin/ionice -c 2 -n 0 -t /usr/bin/rclone mount gdrive: /RAID/FUSE/
    --cache-tmp-upload-path /RAID/tempStorage/rclone_tmp_upload \
    --modify-window 1s \
    --drive-use-trash=false \
-   --cache-chunk-path /home/plex/.cache/rclone/cache-backend \
-   --cache-db-path /home/plex/.cache/rclone/cache-backend \
-   --cache-dir /home/plex/.cache/rclone \
+   --cache-chunk-path /home/userplex/.cache/rclone/cache-backend \
+   --cache-db-path /home/userplex/.cache/rclone/cache-backend \
+   --cache-dir /home/userplex/.cache/rclone \
    --cache-tmp-wait-time 15m \
-   --config /home/plex/.config/rclone/rclone.conf \
+   --config /home/userplex/.config/rclone/rclone.conf \
    --buffer-size=0M \
    --daemon-timeout=10m \
    --tpslimit 5 \
@@ -30,7 +30,7 @@ ExecStart=/usr/bin/ionice -c 2 -n 0 -t /usr/bin/rclone mount gdrive: /RAID/FUSE/
    --log-level INFO
 ExecStop=/bin/fusermount -uz /RAID/FUSE/mergerfs/gdrive
 Restart=on-abort
-User=plex
-Group=plex
+User=userplex
+Group=userplex
 [Install]
 WantedBy=media.service

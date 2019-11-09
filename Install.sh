@@ -43,29 +43,29 @@ remDest=~/backup
 cpycmd="rsync -razvh"
 
 ## Set Backup Directory here
-backupDir=/home/plex/backup
+backupDir=/home/$user/backup
 ## Programs we are backing up data for
 
 # Mono keypairs
-prgrmtrgt0=/home/plex/.config/.mono/keypairs
+prgrmtrgt0=/home/$user/.config/.mono/keypairs
 
 # Sonarr
-prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled/
-bkupprgrmtrgt1=/home/plex/.config/NzbDrone
+prgrmtrgt1=/home/$user/.config/NzbDrone/Backups/scheduled/
+bkupprgrmtrgt1=/home/$user/.config/NzbDrone
 
 # Radarr
-prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled/
-bkupprgrmtrgt2=/home/plex/.config/Radarr
+prgrmtrgt2=/home/$user/.config/Radarr/Backups/scheduled/
+bkupprgrmtrgt2=/home/$user/.config/Radarr
 
 # lidarr
-prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled/
-bkupprgrmtrgt3=/home/plex/.config/Lidarr
+prgrmtrgt3=/home/$user/.config/Lidarr/Backups/scheduled/
+bkupprgrmtrgt3=/home/$user/.config/Lidarr
 
 # NzbGet
 prgrmtrgt4=/opt/nzbget/nzbget.conf
 
 # Deluge
-prgrmtrgt5=/home/plex/.config/deluge
+prgrmtrgt5=/home/$user/.config/deluge
 
 # Mylar
 prgrmtrgt6=/opt/Mylar/mylar.db
@@ -75,14 +75,14 @@ prgrmtrgt6a=/opt/Mylar/config.ini
 prgrmtrgt7="/var/lib/plexmediaserver/Library/Application Support/Plex Media Server"
 
 # Jackett
-prgrmtrgt8=/home/plex/.config/Jackett/ServerConfig.json
-progrmtrgt8a=/home/plex/.config/Jackett/Indexers
+prgrmtrgt8=/home/$user/.config/Jackett/ServerConfig.json
+progrmtrgt8a=/home/$user/.config/Jackett/Indexers
 
 # Headphones
 prgrmtrgt9=/opt/headphones/config.ini
 
 # Entire Config Folder
-prgrmdir1=/home/plex/.config
+prgrmdir1=/home/$user/.config
 
 
 ################## End of Section ################
@@ -325,6 +325,17 @@ sudo chmod -R 755 $driveArray
 ## Move service files and enable them
 cd $target_PWD
 sudo cp ConfigFiles/systemd_Services/* /etc/systemd/system/ -A
+sudo find /etc/systemd/system/ -type f -name "*" -print0 | xargs -0 sed -i "s/userplex/$user/g"
+
+sudo cp ConfigFiles/init.d_Services/* /etc/init.d/
+sudo find /etc/init.d/ -type f -name "*" -print0 | xargs -0 sed -i "s/userplex/$user/g"
+
+sudo cp ConfigFiles/etc-default_Services/* /etc/default/ -A
+sudo find /etc/default/ -type f -name "*" -print0 | xargs -0 sed -i "s/userplex/$user/g"
+
+sudo chown -R root.root /etc/systemd/system
+sudo chown -R root.root /etc/init.d
+sudo chown -R root.root /etc/default
 
 sudo systemctl enable DATA-FUSE-Rclone.mount
 sudo systemctl enable deluge-web.service
@@ -337,7 +348,6 @@ sudo systemctl enable ombi.service
 sudo systemctl enable radarr.service
 sudo systemctl enable rclone.service
 
-sudo cp ConfigFiles/init.d_Services/* /etc/init.d/
 
 sudo chmod +x /etc/init.d/lazylibrarian
 sudo chmod +x /etc/init.d/mylar
@@ -351,7 +361,6 @@ sudo update-rc.d lazylibrarian enable
 sudo update-rc.d mylar enable
 sudo update-rc.d nzbdrone enable
 
-sudo cp ConfigFiles/etc-default_Services/* /etc/default/ -A
 
 ## Everything is completed, reboot and all will be working upon startup.
 

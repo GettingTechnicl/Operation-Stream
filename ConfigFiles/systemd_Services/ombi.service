@@ -8,8 +8,8 @@ WorkingDirectory=/opt/Ombi
 ExecStart=/opt/Ombi/Ombi --baseurl /ombi
 Type=simple
 GuessMainPID=no
-User=plex
-Group=plex
+User=userplex
+Group=userplex
 Restart=always
 RestartSec=3
 

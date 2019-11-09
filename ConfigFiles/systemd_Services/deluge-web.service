@@ -5,8 +5,8 @@ After=network-online.target deluged.service
 Wants=deluged.service
 [Service]
 Type=simple
-User=plex
-Group=plex
+User=userplex
+Group=userplex
 UMask=027
 # This 5 second delay is necessary on some systems
 # to ensure deluged has been fully started

@@ -16,7 +16,7 @@
 APP_PATH=/opt/NzbDrone
 
 # user
-RUN_AS=plex
+RUN_AS=userplex
 
 # path to mono bin
 DAEMON=$(which mono)

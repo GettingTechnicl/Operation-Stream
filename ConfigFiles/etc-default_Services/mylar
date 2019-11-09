@@ -1,4 +1,4 @@
-MYLAR_USER=plex
+MYLAR_USER=userplex
 MYLAR_HOME=/opt/Mylar
 MYLAR_DATA=/opt/Mylar
 MYLAR_PORT=8090

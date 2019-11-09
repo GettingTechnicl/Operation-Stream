@@ -3,7 +3,7 @@ Description=Jackett Daemon
 After=network.target
 
 [Service]
-User=plex
+User=userplex
 Restart=always
 RestartSec=5
 Type=simple

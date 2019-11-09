@@ -12,7 +12,7 @@ APP_PATH=/opt/lazylibrarian
                                                                                                                         # [optional] change to 1 to enable daemon                                                                               ENABLE_DAEMON=1
 
 # [required] user or uid of account to run the program as:
-RUN_AS=plex
+RUN_AS=userplex
 
 # [optional] change to 1 to enable updating from webinterface
 # this changes ownership of /opt/lazylibrarian to user set @ RUN_AS

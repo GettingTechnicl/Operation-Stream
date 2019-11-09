@@ -4,8 +4,8 @@ Documentation=http://nzbget.net/Documentation
 After=network.target
 
 [Service]
-User=plex
-Group=plex
+User=userplex
+Group=userplex
 Type=forking
 ExecStart=/opt/nzbget/nzbget -D
 ExecStop=/opt/nzbget/nzbget -Q
