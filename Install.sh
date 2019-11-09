@@ -12,6 +12,8 @@ driveArray=/RAID
 ## Set the user that EVERYTHING will run under here (ex. user=plex)
 user=$USER
 
+## Set your website name for reverse proxy ## (Ex. example.com NOT www.example.com - www.example.com will cause issues)
+siteName=example.com
 ## Set the location you want the applications to be installed in, I recommend
 ## /opt... (ex. app_Dir=/opt)
 app_Dir=/opt
@@ -469,8 +471,9 @@ sudo a2enmod php7.2
 sudo a2enmod cache_disk
 sudo a2enmod expires
 sudo a2enmod ssl
-suo a2dissite 000-default*
+sudo a2dissite 000-default*
 sudo cp $target_PWD/ConfigFiles/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf -A
+sudo find /etc/apache2/sites-available -type f -name "*" -print0 | xargs -0 sed -i "s/supeRSite/$siteName/g"
 sudo a2ensite 000-default*
 sudo systemctl restart apache2
 
