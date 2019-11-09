@@ -19,6 +19,8 @@ app_Dir=/opt
 ## Set the temporary Download location here (ex. /home/$user/Downloads)
 dl_Dir=/home/$user/Downloads
 
+## Set Logfile here (ex. )
+Logfile=target_PWD/debug.log
 ## Don't touch this one
 target_PWD=$(readlink -f .)
 ##############################  End Of Section ################################
@@ -365,39 +367,39 @@ break
 mkdir $backupDir
 
 # Mono
-$cpycmd $prgrmtrgt0/ $backupDir/prgrmtrgt0
+$cpycmd $prgrmtrgt0/ $backupDir/prgrmtrgt0 > $Logfile
 
 # Sonarr
-$cpycmd $prgrmtrgt1/$(ls -1t | head -1) $backupDir/prgrmtrgt1
+$cpycmd $prgrmtrgt1/$(ls -1t | head -1) $backupDir/prgrmtrgt1 > $Logfile
 
 # Radarr
-$cpycmd $prgrmtrgt2/$(ls -1t | head -1) $backupDir/prgrmtrgt2
+$cpycmd $prgrmtrgt2/$(ls -1t | head -1) $backupDir/prgrmtrgt2 > $Logfile
 
 # Lidarr
-$cpycmd $prgrmtrgt3/$(ls -1t | head -1) $backupDir/prgrmtrgt3
+$cpycmd $prgrmtrgt3/$(ls -1t | head -1) $backupDir/prgrmtrgt3 > $Logfile
 
 # NzbGet
-$cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4
+$cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4 > $Logfile
 
 # Deluge
-$cpycmd $prgrmtrgt5/ $backupDir/prgrmtrgt5
+$cpycmd $prgrmtrgt5/ $backupDir/prgrmtrgt5 > $Logfile
 
 # Mylar
-$cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6
-$cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a
+$cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6 > $Logfile
+$cpycmd $prgrmtrgt6a $backupDir/prgrmtrgrt6a > $Logfile
 
 # Plex
-$cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7
+$cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7 > $Logfile
 
 # Jackett
-$cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8
-$cpycmd $progrmtrgt8a/ $backupDir/prgrmtrgt8a
+$cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8 > $Logfile
+$cpycmd $progrmtrgt8a/ $backupDir/prgrmtrgt8a > $Logfile
 
 # Headphones
-$cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9
+$cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9 > $Logfile
 
 # Entire Config Folder
-$cpycmd $prgrmdir1/ $backupDir/prgrmdir1
+$cpycmd $prgrmdir1/ $backupDir/prgrmdir1 > $Logfile
 break
 ;;
 
@@ -407,36 +409,36 @@ break
 
 
 #Entire Config Folder
-$cpycmd $backupDir/prgrmdir1/ $prgrmdir1 -A
+$cpycmd $backupDir/prgrmdir1/ $prgrmdir1 -A > $Logfile
 
 # Mono
-$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0 -A
+$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0 -A > $Logfile
 
 # Sonarr
-unzip $backupDir/prgrmtrgt1/$(ls -1t | head -1) -d $bkupprgrmtrgt1 -A
+unzip $backupDir/prgrmtrgt1/$(ls -1t | head -1) -d $bkupprgrmtrgt1 -A > $Logfile
 
 # Radarr
-unzip $backupDir/prgrmtrgt2/$(ls -1t | head -1) -d $bkupprgrmtrgt2 -A
+unzip $backupDir/prgrmtrgt2/$(ls -1t | head -1) -d $bkupprgrmtrgt2 -A > $Logfile
 
 # Lidarr
-unzip $backupDir/prgrmtrgt3/$(ls -1t | head -1) -d $bkupprgrmtrgt3 -A
+unzip $backupDir/prgrmtrgt3/$(ls -1t | head -1) -d $bkupprgrmtrgt3 -A > $Logfile
 
 # NzbGet
-$cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4 -A
+$cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4 -A > $Logfile
 
 # Deluge
-$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5 -A
+$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5 -A > $Logfile
 
 # Mylarr
-$cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6 -A
-$cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a -A
+$cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6 -A > $Logfile
+$cpycmd $backupDir/prgrmtrgt6a $prgrmtrgt6a -A > $Logfile
 
 # Plex
-$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7 -A
+$cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7 -A > $Logfile
 
 # Jackett
-$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8 -A
-$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a -A
+$cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8 -A > $Logfile
+$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a -A > $Logfile
 
 break
 ;;
@@ -480,45 +482,45 @@ break 2
 ########### End Section ##########
 
 "Stop Services ${opts[7]}")
-sudo service nzbdrone stop
-sudo service radarr stop
-sudo service lidarr stop
-sudo service nzbget stop
-sudo service deluged stop
-sudo service deluge-web stop
-sudo service mylar stop
-sudo service plexmediaserver stop
-sudo service jackett stop
-sudo service headphones stop
+sudo service nzbdrone stop > $Logfile
+sudo service radarr stop > $Logfile
+sudo service lidarr stop > $Logfile
+sudo service nzbget stop > $Logfile
+sudo service deluged stop > $Logfile
+sudo service deluge-web stop > $Logfile
+sudo service mylar stop > $Logfile
+sudo service plexmediaserver stop > $Logfile
+sudo service jackett stop > $Logfile
+sudo service headphones stop > $Logfile
 break
 ;;
 ########### Section Completed #########
 
 "Start Services ${opts[8]}")
-sudo service nzbdrone start
-sudo service radarr start
-sudo service lidarr start
-sudo service nzbget start
-sudo service deluged start
-sudo service deluge-web start
-sudo service mylar start
-sudo service plexmediaserver start
-sudo service jackett start
-sudo service headphones start
+sudo service nzbdrone start > $Logfile
+sudo service radarr start > $Logfile
+sudo service lidarr start > $Logfile
+sudo service nzbget start > $Logfile
+sudo service deluged start > $Logfile
+sudo service deluge-web start > $Logfile
+sudo service mylar start > $Logfile
+sudo service plexmediaserver start > $Logfile
+sudo service jackett start > $Logfile
+sudo service headphones start > $Logfile
 break
 ;;
 
 ############ End Section ############
 
 "Sync 2 Local${opts[9]}")
-$cpycmd $sshPort $remSrc:$remDest $backupDir
+$cpycmd $sshPort $remSrc:$remDest $backupDir > $Logfile
 break
 ;;
 
 ############# End Section ##########
 
 "Sync 2 Remote${opts[10]}")
-$cpycmd $sshPort2 $backupDir $remSrc2:$remDest
+$cpycmd $sshPort2 $backupDir/ $remSrc2:$remDest > $Logfile
 break
 ;;
 
