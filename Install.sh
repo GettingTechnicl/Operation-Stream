@@ -45,19 +45,19 @@ backupDir=/home/plex/backup
 ## Programs we are backing up data for
 
 # Mono keypairs
-prgrmtrgt0=/home/plex/.config/.mono/keypairs/
+prgrmtrgt0=/home/plex/.config/.mono/keypairs
 
 # Sonarr
-prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled
-bkupprgrmtrgt1=/home/plex/.config/NzbDrone/
+prgrmtrgt1=/home/plex/.config/NzbDrone/Backups/scheduled/
+bkupprgrmtrgt1=/home/plex/.config/NzbDrone
 
 # Radarr
-prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled
-bkupprgrmtrgt2=/home/plex/.config/Radarr/
+prgrmtrgt2=/home/plex/.config/Radarr/Backups/scheduled/
+bkupprgrmtrgt2=/home/plex/.config/Radarr
 
 # lidarr
-prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled
-bkupprgrmtrgt3=/home/plex/.config/Lidarr/
+prgrmtrgt3=/home/plex/.config/Lidarr/Backups/scheduled/
+bkupprgrmtrgt3=/home/plex/.config/Lidarr
 
 # NzbGet
 prgrmtrgt4=/opt/nzbget/nzbget.conf
@@ -361,26 +361,26 @@ break
 
           "Create Backup ${opts[3]}")
 
- # Create backupDir
+# Create backupDir
 mkdir $backupDir
 
 # Mono
-$cpycmd $prgrmtrgt0 $backupDir/prgrmtrgt0
+$cpycmd $prgrmtrgt0/ $backupDir/prgrmtrgt0
 
 # Sonarr
-$cpycmd $prgrmtrgt1/$(ls -1t | head -1) $backupDir/prgrmtrgt1/
+$cpycmd $prgrmtrgt1/$(ls -1t | head -1) $backupDir/prgrmtrgt1
 
 # Radarr
-$cpycmd $prgrmtrgt2/$(ls -1t | head -1) $backupDir/prgrmtrgt2/
+$cpycmd $prgrmtrgt2/$(ls -1t | head -1) $backupDir/prgrmtrgt2
 
 # Lidarr
-$cpycmd $prgrmtrgt3/$(ls -1t | head -1) $backupDir/prgrmtrgt3/
+$cpycmd $prgrmtrgt3/$(ls -1t | head -1) $backupDir/prgrmtrgt3
 
 # NzbGet
 $cpycmd $prgrmtrgt4 $backupDir/prgrmtrgt4
 
 # Deluge
-$cpycmd $prgrmtrgt5 $backupDir/prgrmtrgt5
+$cpycmd $prgrmtrgt5/ $backupDir/prgrmtrgt5
 
 # Mylar
 $cpycmd $prgrmtrgt6 $backupDir/prgrmtrgt6
@@ -391,25 +391,26 @@ $cpycmd $prgrmtrgt7 $backupDir/prgrmtrgt7
 
 # Jackett
 $cpycmd $prgrmtrgt8 $backupDir/prgrmtrgt8
-$cpycmd $progrmtrgt8a $backupDir/prgrmtrgt8a
+$cpycmd $progrmtrgt8a/ $backupDir/prgrmtrgt8a
 
 # Headphones
 $cpycmd $prgrmtrgt9 $backupDir/prgrmtrgt9
 
 # Entire Config Folder
-$cpycmd $prgrmdir1 $backupDir/prgrmdir1
+$cpycmd $prgrmdir1/ $backupDir/prgrmdir1
 break
 ;;
+
 ################# End Of Section ###################
              "Restore Backup ${opts[4]}")
 
 
 
 #Entire Config Folder
-$cpycmd $backupDir/prgrmdir1 $prgrmdir1 -A
+$cpycmd $backupDir/prgrmdir1/ $prgrmdir1 -A
 
 # Mono
-$cpycmd $backupDir/prgrmtrgt0 $prgrmtrgt0 -A
+$cpycmd $backupDir/prgrmtrgt0/ $prgrmtrgt0 -A
 
 # Sonarr
 unzip $backupDir/prgrmtrgt1/$(ls -1t | head -1) -d $bkupprgrmtrgt1 -A
@@ -424,7 +425,7 @@ unzip $backupDir/prgrmtrgt3/$(ls -1t | head -1) -d $bkupprgrmtrgt3 -A
 $cpycmd $backupDir/prgrmtrgt4 $prgrmtrgt4 -A
 
 # Deluge
-$cpycmd $backupDir/prgrmtrgt5 $prgrmtrgt5 -A
+$cpycmd $backupDir/prgrmtrgt5/ $prgrmtrgt5 -A
 
 # Mylarr
 $cpycmd $backupDir/prgrmtrgt6 $prgrmtrgt6 -A
@@ -435,10 +436,8 @@ $cpycmd $backupDir/prgrmtrgt7 $prgrmtrgt7 -A
 
 # Jackett
 $cpycmd $backupDir/prgrmtrgt8 $prgrmtrgt8 -A
-$cpycmd $backupDir/prgrmtrgt8a $prgrmtrgt8a -A
+$cpycmd $backupDir/prgrmtrgt8a/ $prgrmtrgt8a -A
 
-#Headphones
-$cpycmd $backupDir/prgrmtrgt9 $prgrmtrgt9 -A
 break
 ;;
 
