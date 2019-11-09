@@ -19,8 +19,8 @@ app_Dir=/opt
 ## Set the temporary Download location here (ex. /home/$user/Downloads)
 dl_Dir=/home/$user/Downloads
 
-## Set Logfile here (ex. )
-Logfile=target_PWD/debug.log
+## Set Logfile here (ex. Logfile=$target_PWD/debug.log)
+Logfile=$target_PWD/debug.log
 ## Don't touch this one
 target_PWD=$(readlink -f .)
 ##############################  End Of Section ################################
