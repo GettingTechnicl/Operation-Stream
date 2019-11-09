@@ -513,7 +513,7 @@ break
 ############ End Section ############
 
 "Sync 2 Local${opts[9]}")
-$cpycmd $sshPort $remSrc:$remDest $backupDir > $Logfile
+$cpycmd $sshPort $remSrc:$remDest/ $backupDir > $Logfile
 break
 ;;
 
