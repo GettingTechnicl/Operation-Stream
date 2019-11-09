@@ -64,14 +64,14 @@ prgrmtrgt3=/home/$user/.config/Lidarr/Backups/scheduled/
 bkupprgrmtrgt3=/home/$user/.config/Lidarr
 
 # NzbGet
-prgrmtrgt4=/opt/nzbget/nzbget.conf
+prgrmtrgt4=$app_Dir/nzbget/nzbget.conf
 
 # Deluge
 prgrmtrgt5=/home/$user/.config/deluge
 
 # Mylar
-prgrmtrgt6=/opt/Mylar/mylar.db
-prgrmtrgt6a=/opt/Mylar/config.ini
+prgrmtrgt6=$app_Dir/Mylar/mylar.db
+prgrmtrgt6a=$app_Dir/Mylar/config.ini
 
 # Plex
 prgrmtrgt7="/var/lib/plexmediaserver/Library/Application Support/Plex Media Server"
@@ -81,7 +81,7 @@ prgrmtrgt8=/home/$user/.config/Jackett/ServerConfig.json
 progrmtrgt8a=/home/$user/.config/Jackett/Indexers
 
 # Headphones
-prgrmtrgt9=/opt/headphones/config.ini
+prgrmtrgt9=$app_Dir/headphones/config.ini
 
 # Entire Config Folder
 prgrmdir1=/home/$user/.config
