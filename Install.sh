@@ -486,7 +486,7 @@ sudo a2enmod cache_disk
 sudo a2enmod expires
 sudo a2enmod ssl
 sudo a2dissite 000-default*
-sudo cp $target_PWD/ConfigFiles/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf -A
+sudo cp $target_PWD/ConfigFiles/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf -y
 sudo find /etc/apache2/sites-available -type f -name "*" -print0 | xargs -0 sed -i "s/supeRSite/$siteName/g"
 sudo a2ensite 000-default*
 sudo systemctl restart apache2
